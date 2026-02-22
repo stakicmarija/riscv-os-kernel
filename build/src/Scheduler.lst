@@ -1,0 +1,555 @@
+GAS LISTING /tmp/ccMiUlka.s 			page 1
+
+
+   1              		.file	"Scheduler.cpp"
+   2              		.option pic
+   3              		.option norelax
+   4              		.text
+   5              	.Ltext0:
+   6              		.align	2
+   8              	_Z41__static_initialization_and_destruction_0ii:
+   9              	.LFB19:
+  10              		.file 1 "src/Scheduler.cpp"
+   1:src/Scheduler.cpp **** #include "../h/Scheduler.hpp"
+   2:src/Scheduler.cpp **** 
+   3:src/Scheduler.cpp **** List<TCB> Scheduler::threadQueue;
+   4:src/Scheduler.cpp **** void Scheduler::put(TCB *tcb) {
+   5:src/Scheduler.cpp ****   threadQueue.addLast(tcb);
+   6:src/Scheduler.cpp **** }
+   7:src/Scheduler.cpp **** 
+   8:src/Scheduler.cpp **** TCB* Scheduler::get() {
+   9:src/Scheduler.cpp ****   return threadQueue.removeFirst();
+  10:src/Scheduler.cpp **** }
+  11              		.loc 1 10 1
+  12              		.cfi_startproc
+  13              	.LVL0:
+  14 0000 130101FF 		addi	sp,sp,-16
+  15              		.cfi_def_cfa_offset 16
+  16 0004 23348100 		sd	s0,8(sp)
+  17              		.cfi_offset 8, -8
+  18 0008 13040101 		addi	s0,sp,16
+  19              		.cfi_def_cfa 8, 0
+  20              		.loc 1 10 1 is_stmt 0
+  21 000c 93071000 		li	a5,1
+  22 0010 6308F500 		beq	a0,a5,.L4
+  23              	.L1:
+  24 0014 03348100 		ld	s0,8(sp)
+  25              		.cfi_remember_state
+  26              		.cfi_restore 8
+  27              		.cfi_def_cfa 2, 16
+  28 0018 13010101 		addi	sp,sp,16
+  29              		.cfi_def_cfa_offset 0
+  30 001c 67800000 		jr	ra
+  31              	.L4:
+  32              		.cfi_restore_state
+  33              		.loc 1 10 1 discriminator 1
+  34 0020 B7070100 		li	a5,65536
+  35 0024 9387F7FF 		addi	a5,a5,-1
+  36 0028 E396F5FE 		bne	a1,a5,.L1
+  37              	.LVL1:
+  38              	.LBB15:
+  39              	.LBB16:
+  40              	.LBB17:
+  41              		.file 2 "src/../h/list.hpp"
+   1:src/../h/list.hpp **** #ifndef LIST_HPP
+   2:src/../h/list.hpp **** #define LIST_HPP
+   3:src/../h/list.hpp **** 
+   4:src/../h/list.hpp **** template <typename T>
+   5:src/../h/list.hpp **** 
+   6:src/../h/list.hpp **** class List{
+   7:src/../h/list.hpp **** private:
+GAS LISTING /tmp/ccMiUlka.s 			page 2
+
+
+   8:src/../h/list.hpp ****     struct Elem{
+   9:src/../h/list.hpp ****       T* data;
+  10:src/../h/list.hpp ****       Elem* next;
+  11:src/../h/list.hpp ****       Elem(T* data, Elem* next) : data(data), next(next) {}
+  12:src/../h/list.hpp ****     };
+  13:src/../h/list.hpp ****     Elem *head, *tail;
+  14:src/../h/list.hpp **** public:
+  15:src/../h/list.hpp ****     List() : head(0), tail(0) {}
+  42              		.loc 2 15 29
+  43 002c 97070000 		lla	a5,.LANCHOR0
+  43      93870700 
+  44 0034 23B00700 		sd	zero,0(a5)
+  45 0038 23B40700 		sd	zero,8(a5)
+  46              	.LVL2:
+  47              	.LBE17:
+  48              	.LBE16:
+  49              	.LBE15:
+  50              		.loc 1 10 1
+  51 003c 6FF09FFD 		j	.L1
+  52              		.cfi_endproc
+  53              	.LFE19:
+  55              		.align	2
+  56              		.globl	_ZN9Scheduler3putEP3TCB
+  58              	_ZN9Scheduler3putEP3TCB:
+  59              	.LFB9:
+   4:src/Scheduler.cpp ****   threadQueue.addLast(tcb);
+  60              		.loc 1 4 31 is_stmt 1
+  61              		.cfi_startproc
+  62              	.LVL3:
+  63 0040 130101FE 		addi	sp,sp,-32
+  64              		.cfi_def_cfa_offset 32
+  65 0044 233C1100 		sd	ra,24(sp)
+  66 0048 23388100 		sd	s0,16(sp)
+  67 004c 23349100 		sd	s1,8(sp)
+  68              		.cfi_offset 1, -8
+  69              		.cfi_offset 8, -16
+  70              		.cfi_offset 9, -24
+  71 0050 13040102 		addi	s0,sp,32
+  72              		.cfi_def_cfa 8, 0
+  73 0054 93040500 		mv	s1,a0
+   5:src/Scheduler.cpp **** }
+  74              		.loc 1 5 3
+  75              	.LVL4:
+  76              	.LBB18:
+  77              	.LBB19:
+  16:src/../h/list.hpp ****     List(const List<T> &) = delete;
+  17:src/../h/list.hpp ****     List<T> &operator=(const List<T> &) = delete;
+  18:src/../h/list.hpp **** 
+  19:src/../h/list.hpp ****     void addFirst(T *data){
+  20:src/../h/list.hpp ****       Elem* newElem = new Elem(data, head);
+  21:src/../h/list.hpp ****       head = newElem;
+  22:src/../h/list.hpp ****       if(!tail) tail = head;
+  23:src/../h/list.hpp ****     }
+  24:src/../h/list.hpp **** 
+  25:src/../h/list.hpp ****     void addLast(T *data){
+  26:src/../h/list.hpp ****       Elem* newElem = new Elem(data, 0);
+  78              		.loc 2 26 23 is_stmt 0
+GAS LISTING /tmp/ccMiUlka.s 			page 3
+
+
+  79 0058 13050001 		li	a0,16
+  80              	.LVL5:
+  81 005c 97000000 		call	_Znwm@plt
+  81      E7800000 
+  82              	.LVL6:
+  83              	.LBB20:
+  84              	.LBB21:
+  11:src/../h/list.hpp ****     };
+  85              		.loc 2 11 56
+  86 0064 23309500 		sd	s1,0(a0)
+  87 0068 23340500 		sd	zero,8(a0)
+  88              	.LVL7:
+  89              	.LBE21:
+  90              	.LBE20:
+  27:src/../h/list.hpp ****       if(tail){
+  91              		.loc 2 27 10
+  92 006c 97070000 		ld	a5,.LANCHOR0+8
+  92      83B70700 
+  93              		.loc 2 27 7
+  94 0074 63820702 		beqz	a5,.L6
+  28:src/../h/list.hpp ****         tail->next = newElem;
+  95              		.loc 2 28 9
+  96 0078 23B4A700 		sd	a0,8(a5)
+  29:src/../h/list.hpp ****         tail = newElem;
+  97              		.loc 2 29 9
+  98 007c 97070000 		sd	a0,.LANCHOR0+8,a5
+  98      23B0A700 
+  99              	.LVL8:
+ 100              	.L5:
+ 101              	.LBE19:
+ 102              	.LBE18:
+   6:src/Scheduler.cpp **** 
+ 103              		.loc 1 6 1
+ 104 0084 83308101 		ld	ra,24(sp)
+ 105              		.cfi_remember_state
+ 106              		.cfi_restore 1
+ 107 0088 03340101 		ld	s0,16(sp)
+ 108              		.cfi_restore 8
+ 109              		.cfi_def_cfa 2, 32
+ 110 008c 83348100 		ld	s1,8(sp)
+ 111              		.cfi_restore 9
+ 112              	.LVL9:
+ 113 0090 13010102 		addi	sp,sp,32
+ 114              		.cfi_def_cfa_offset 0
+ 115 0094 67800000 		jr	ra
+ 116              	.LVL10:
+ 117              	.L6:
+ 118              		.cfi_restore_state
+ 119              	.LBB23:
+ 120              	.LBB22:
+  30:src/../h/list.hpp ****       }else head = tail = newElem;
+ 121              		.loc 2 30 13
+ 122 0098 97070000 		lla	a5,.LANCHOR0
+ 122      93870700 
+ 123 00a0 23B4A700 		sd	a0,8(a5)
+ 124 00a4 23B0A700 		sd	a0,0(a5)
+ 125              	.LVL11:
+GAS LISTING /tmp/ccMiUlka.s 			page 4
+
+
+ 126              	.LBE22:
+ 127              	.LBE23:
+   6:src/Scheduler.cpp **** 
+ 128              		.loc 1 6 1
+ 129 00a8 6FF0DFFD 		j	.L5
+ 130              		.cfi_endproc
+ 131              	.LFE9:
+ 133              		.align	2
+ 134              		.globl	_ZN9Scheduler3getEv
+ 136              	_ZN9Scheduler3getEv:
+ 137              	.LFB10:
+   8:src/Scheduler.cpp ****   return threadQueue.removeFirst();
+ 138              		.loc 1 8 23 is_stmt 1
+ 139              		.cfi_startproc
+ 140 00ac 130101FE 		addi	sp,sp,-32
+ 141              		.cfi_def_cfa_offset 32
+ 142 00b0 233C1100 		sd	ra,24(sp)
+ 143 00b4 23388100 		sd	s0,16(sp)
+ 144 00b8 23349100 		sd	s1,8(sp)
+ 145              		.cfi_offset 1, -8
+ 146              		.cfi_offset 8, -16
+ 147              		.cfi_offset 9, -24
+ 148 00bc 13040102 		addi	s0,sp,32
+ 149              		.cfi_def_cfa 8, 0
+   9:src/Scheduler.cpp **** }
+ 150              		.loc 1 9 3
+ 151              	.LVL12:
+ 152              	.LBB24:
+ 153              	.LBB25:
+  31:src/../h/list.hpp ****     }
+  32:src/../h/list.hpp **** 
+  33:src/../h/list.hpp ****     T* removeFirst(){
+  34:src/../h/list.hpp ****       if(!head) return 0;
+ 154              		.loc 2 34 11 is_stmt 0
+ 155 00c0 17050000 		ld	a0,.LANCHOR0
+ 155      03350500 
+ 156              		.loc 2 34 7
+ 157 00c8 63020504 		beqz	a0,.L12
+ 158              	.LVL13:
+  35:src/../h/list.hpp ****       Elem *elem = head;
+  36:src/../h/list.hpp ****       head = head->next;
+ 159              		.loc 2 36 20
+ 160 00cc 83378500 		ld	a5,8(a0)
+ 161              		.loc 2 36 7
+ 162 00d0 17070000 		sd	a5,.LANCHOR0,a4
+ 162      2330F700 
+  37:src/../h/list.hpp ****       if(!head) tail = 0;
+ 163              		.loc 2 37 7
+ 164 00d8 63840702 		beqz	a5,.L14
+ 165              	.L11:
+  38:src/../h/list.hpp **** 
+  39:src/../h/list.hpp ****       T* data = elem->data;
+ 166              		.loc 2 39 10
+ 167 00dc 83340500 		ld	s1,0(a0)
+ 168              	.LVL14:
+  40:src/../h/list.hpp ****       delete elem;
+ 169              		.loc 2 40 7
+GAS LISTING /tmp/ccMiUlka.s 			page 5
+
+
+ 170 00e0 97000000 		call	_ZdlPv@plt
+ 170      E7800000 
+ 171              	.LVL15:
+ 172              	.L9:
+ 173              	.LBE25:
+ 174              	.LBE24:
+ 175              		.loc 1 10 1
+ 176 00e8 13850400 		mv	a0,s1
+ 177 00ec 83308101 		ld	ra,24(sp)
+ 178              		.cfi_remember_state
+ 179              		.cfi_restore 1
+ 180 00f0 03340101 		ld	s0,16(sp)
+ 181              		.cfi_restore 8
+ 182              		.cfi_def_cfa 2, 32
+ 183 00f4 83348100 		ld	s1,8(sp)
+ 184              		.cfi_restore 9
+ 185 00f8 13010102 		addi	sp,sp,32
+ 186              		.cfi_def_cfa_offset 0
+ 187 00fc 67800000 		jr	ra
+ 188              	.LVL16:
+ 189              	.L14:
+ 190              		.cfi_restore_state
+ 191              	.LBB27:
+ 192              	.LBB26:
+  37:src/../h/list.hpp ****       if(!head) tail = 0;
+ 193              		.loc 2 37 17
+ 194 0100 97070000 		sd	zero,.LANCHOR0+8,a5
+ 194      23B00700 
+ 195 0108 6FF05FFD 		j	.L11
+ 196              	.LVL17:
+ 197              	.L12:
+  34:src/../h/list.hpp ****       Elem *elem = head;
+ 198              		.loc 2 34 24
+ 199 010c 93040500 		mv	s1,a0
+ 200              	.LVL18:
+ 201              	.LBE26:
+ 202              	.LBE27:
+   9:src/Scheduler.cpp **** }
+ 203              		.loc 1 9 34
+ 204 0110 6FF09FFD 		j	.L9
+ 205              		.cfi_endproc
+ 206              	.LFE10:
+ 208              		.align	2
+ 210              	_GLOBAL__sub_I__ZN9Scheduler11threadQueueE:
+ 211              	.LFB20:
+ 212              		.loc 1 10 1 is_stmt 1
+ 213              		.cfi_startproc
+ 214 0114 130101FF 		addi	sp,sp,-16
+ 215              		.cfi_def_cfa_offset 16
+ 216 0118 23341100 		sd	ra,8(sp)
+ 217 011c 23308100 		sd	s0,0(sp)
+ 218              		.cfi_offset 1, -8
+ 219              		.cfi_offset 8, -16
+ 220 0120 13040101 		addi	s0,sp,16
+ 221              		.cfi_def_cfa 8, 0
+ 222              		.loc 1 10 1 is_stmt 0
+ 223 0124 B7050100 		li	a1,65536
+GAS LISTING /tmp/ccMiUlka.s 			page 6
+
+
+ 224 0128 9385F5FF 		addi	a1,a1,-1
+ 225 012c 13051000 		li	a0,1
+ 226 0130 97000000 		call	_Z41__static_initialization_and_destruction_0ii
+ 226      E7800000 
+ 227              	.LVL19:
+ 228 0138 83308100 		ld	ra,8(sp)
+ 229              		.cfi_restore 1
+ 230 013c 03340100 		ld	s0,0(sp)
+ 231              		.cfi_restore 8
+ 232              		.cfi_def_cfa 2, 16
+ 233 0140 13010101 		addi	sp,sp,16
+ 234              		.cfi_def_cfa_offset 0
+ 235 0144 67800000 		jr	ra
+ 236              		.cfi_endproc
+ 237              	.LFE20:
+ 239              		.section	.init_array,"aw"
+ 240              		.align	3
+ 241 0000 00000000 		.dword	_GLOBAL__sub_I__ZN9Scheduler11threadQueueE
+ 241      00000000 
+ 242              		.globl	_ZN9Scheduler11threadQueueE
+ 243              		.bss
+ 244              		.align	3
+ 245              		.set	.LANCHOR0,. + 0
+ 248              	_ZN9Scheduler11threadQueueE:
+ 249 0000 00000000 		.zero	16
+ 249      00000000 
+ 249      00000000 
+ 249      00000000 
+ 250              		.text
+ 251              	.Letext0:
+ 252              		.file 3 "src/../h/Scheduler.hpp"
+GAS LISTING /tmp/ccMiUlka.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 Scheduler.cpp
+     /tmp/ccMiUlka.s:8      .text:0000000000000000 _Z41__static_initialization_and_destruction_0ii
+     /tmp/ccMiUlka.s:12     .text:0000000000000000 .L0 
+     /tmp/ccMiUlka.s:14     .text:0000000000000000 .L0 
+     /tmp/ccMiUlka.s:15     .text:0000000000000004 .L0 
+     /tmp/ccMiUlka.s:17     .text:0000000000000008 .L0 
+     /tmp/ccMiUlka.s:19     .text:000000000000000c .L0 
+     /tmp/ccMiUlka.s:21     .text:000000000000000c .L0 
+     /tmp/ccMiUlka.s:25     .text:0000000000000018 .L0 
+     /tmp/ccMiUlka.s:26     .text:0000000000000018 .L0 
+     /tmp/ccMiUlka.s:27     .text:0000000000000018 .L0 
+     /tmp/ccMiUlka.s:29     .text:000000000000001c .L0 
+     /tmp/ccMiUlka.s:32     .text:0000000000000020 .L0 
+     /tmp/ccMiUlka.s:34     .text:0000000000000020 .L0 
+     /tmp/ccMiUlka.s:43     .text:000000000000002c .L0 
+     /tmp/ccMiUlka.s:51     .text:000000000000003c .L0 
+     /tmp/ccMiUlka.s:52     .text:0000000000000040 .L0 
+     /tmp/ccMiUlka.s:58     .text:0000000000000040 _ZN9Scheduler3putEP3TCB
+     /tmp/ccMiUlka.s:61     .text:0000000000000040 .L0 
+     /tmp/ccMiUlka.s:63     .text:0000000000000040 .L0 
+     /tmp/ccMiUlka.s:64     .text:0000000000000044 .L0 
+     /tmp/ccMiUlka.s:68     .text:0000000000000050 .L0 
+     /tmp/ccMiUlka.s:69     .text:0000000000000050 .L0 
+     /tmp/ccMiUlka.s:70     .text:0000000000000050 .L0 
+     /tmp/ccMiUlka.s:72     .text:0000000000000054 .L0 
+     /tmp/ccMiUlka.s:78     .text:0000000000000058 .L0 
+     /tmp/ccMiUlka.s:79     .text:0000000000000058 .L0 
+     /tmp/ccMiUlka.s:86     .text:0000000000000064 .L0 
+     /tmp/ccMiUlka.s:92     .text:000000000000006c .L0 
+     /tmp/ccMiUlka.s:94     .text:0000000000000074 .L0 
+     /tmp/ccMiUlka.s:96     .text:0000000000000078 .L0 
+     /tmp/ccMiUlka.s:98     .text:000000000000007c .L0 
+     /tmp/ccMiUlka.s:104    .text:0000000000000084 .L0 
+     /tmp/ccMiUlka.s:105    .text:0000000000000088 .L0 
+     /tmp/ccMiUlka.s:106    .text:0000000000000088 .L0 
+     /tmp/ccMiUlka.s:108    .text:000000000000008c .L0 
+     /tmp/ccMiUlka.s:109    .text:000000000000008c .L0 
+     /tmp/ccMiUlka.s:111    .text:0000000000000090 .L0 
+     /tmp/ccMiUlka.s:114    .text:0000000000000094 .L0 
+     /tmp/ccMiUlka.s:118    .text:0000000000000098 .L0 
+     /tmp/ccMiUlka.s:122    .text:0000000000000098 .L0 
+     /tmp/ccMiUlka.s:129    .text:00000000000000a8 .L0 
+     /tmp/ccMiUlka.s:130    .text:00000000000000ac .L0 
+     /tmp/ccMiUlka.s:136    .text:00000000000000ac _ZN9Scheduler3getEv
+     /tmp/ccMiUlka.s:139    .text:00000000000000ac .L0 
+     /tmp/ccMiUlka.s:140    .text:00000000000000ac .L0 
+     /tmp/ccMiUlka.s:141    .text:00000000000000b0 .L0 
+     /tmp/ccMiUlka.s:145    .text:00000000000000bc .L0 
+     /tmp/ccMiUlka.s:146    .text:00000000000000bc .L0 
+     /tmp/ccMiUlka.s:147    .text:00000000000000bc .L0 
+     /tmp/ccMiUlka.s:149    .text:00000000000000c0 .L0 
+     /tmp/ccMiUlka.s:154    .text:00000000000000c0 .L0 
+     /tmp/ccMiUlka.s:155    .text:00000000000000c0 .L0 
+     /tmp/ccMiUlka.s:157    .text:00000000000000c8 .L0 
+     /tmp/ccMiUlka.s:160    .text:00000000000000cc .L0 
+     /tmp/ccMiUlka.s:162    .text:00000000000000d0 .L0 
+GAS LISTING /tmp/ccMiUlka.s 			page 8
+
+
+     /tmp/ccMiUlka.s:164    .text:00000000000000d8 .L0 
+     /tmp/ccMiUlka.s:167    .text:00000000000000dc .L0 
+     /tmp/ccMiUlka.s:170    .text:00000000000000e0 .L0 
+     /tmp/ccMiUlka.s:176    .text:00000000000000e8 .L0 
+     /tmp/ccMiUlka.s:178    .text:00000000000000f0 .L0 
+     /tmp/ccMiUlka.s:179    .text:00000000000000f0 .L0 
+     /tmp/ccMiUlka.s:181    .text:00000000000000f4 .L0 
+     /tmp/ccMiUlka.s:182    .text:00000000000000f4 .L0 
+     /tmp/ccMiUlka.s:184    .text:00000000000000f8 .L0 
+     /tmp/ccMiUlka.s:186    .text:00000000000000fc .L0 
+     /tmp/ccMiUlka.s:190    .text:0000000000000100 .L0 
+     /tmp/ccMiUlka.s:194    .text:0000000000000100 .L0 
+     /tmp/ccMiUlka.s:199    .text:000000000000010c .L0 
+     /tmp/ccMiUlka.s:204    .text:0000000000000110 .L0 
+     /tmp/ccMiUlka.s:205    .text:0000000000000114 .L0 
+     /tmp/ccMiUlka.s:210    .text:0000000000000114 _GLOBAL__sub_I__ZN9Scheduler11threadQueueE
+     /tmp/ccMiUlka.s:213    .text:0000000000000114 .L0 
+     /tmp/ccMiUlka.s:214    .text:0000000000000114 .L0 
+     /tmp/ccMiUlka.s:215    .text:0000000000000118 .L0 
+     /tmp/ccMiUlka.s:218    .text:0000000000000120 .L0 
+     /tmp/ccMiUlka.s:219    .text:0000000000000120 .L0 
+     /tmp/ccMiUlka.s:221    .text:0000000000000124 .L0 
+     /tmp/ccMiUlka.s:223    .text:0000000000000124 .L0 
+     /tmp/ccMiUlka.s:229    .text:000000000000013c .L0 
+     /tmp/ccMiUlka.s:231    .text:0000000000000140 .L0 
+     /tmp/ccMiUlka.s:232    .text:0000000000000140 .L0 
+     /tmp/ccMiUlka.s:234    .text:0000000000000144 .L0 
+     /tmp/ccMiUlka.s:236    .text:0000000000000148 .L0 
+     /tmp/ccMiUlka.s:248    .bss:0000000000000000 _ZN9Scheduler11threadQueueE
+     /tmp/ccMiUlka.s:245    .bss:0000000000000000 .LANCHOR0
+     /tmp/ccMiUlka.s:253    .text:0000000000000148 .L0 
+     /tmp/ccMiUlka.s:43     .text:000000000000002c .L0 
+     /tmp/ccMiUlka.s:92     .text:000000000000006c .L0 
+     /tmp/ccMiUlka.s:98     .text:000000000000007c .L0 
+     /tmp/ccMiUlka.s:122    .text:0000000000000098 .L0 
+     /tmp/ccMiUlka.s:155    .text:00000000000000c0 .L0 
+     /tmp/ccMiUlka.s:162    .text:00000000000000d0 .L0 
+     /tmp/ccMiUlka.s:194    .text:0000000000000100 .L0 
+     /tmp/ccMiUlka.s:31     .text:0000000000000020 .L4
+     /tmp/ccMiUlka.s:23     .text:0000000000000014 .L1
+     /tmp/ccMiUlka.s:117    .text:0000000000000098 .L6
+     /tmp/ccMiUlka.s:100    .text:0000000000000084 .L5
+     /tmp/ccMiUlka.s:197    .text:000000000000010c .L12
+     /tmp/ccMiUlka.s:189    .text:0000000000000100 .L14
+     /tmp/ccMiUlka.s:165    .text:00000000000000dc .L11
+     /tmp/ccMiUlka.s:172    .text:00000000000000e8 .L9
+     /tmp/ccMiUlka.s:788    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+     /tmp/ccMiUlka.s:1601   .debug_str:0000000000000132 .LASF37
+     /tmp/ccMiUlka.s:1609   .debug_str:0000000000000222 .LASF38
+     /tmp/ccMiUlka.s:1607   .debug_str:0000000000000200 .LASF39
+     /tmp/ccMiUlka.s:5      .text:0000000000000000 .Ltext0
+     /tmp/ccMiUlka.s:251    .text:0000000000000148 .Letext0
+     /tmp/ccMiUlka.s:1561   .debug_line:0000000000000000 .Ldebug_line0
+     /tmp/ccMiUlka.s:1585   .debug_str:00000000000000ba .LASF0
+     /tmp/ccMiUlka.s:1597   .debug_str:0000000000000113 .LASF40
+     /tmp/ccMiUlka.s:1571   .debug_str:0000000000000043 .LASF41
+     /tmp/ccMiUlka.s:1579   .debug_str:000000000000007e .LASF42
+GAS LISTING /tmp/ccMiUlka.s 			page 9
+
+
+     /tmp/ccMiUlka.s:1641   .debug_str:0000000000000312 .LASF1
+     /tmp/ccMiUlka.s:1627   .debug_str:0000000000000296 .LASF4
+     /tmp/ccMiUlka.s:1589   .debug_str:00000000000000e2 .LASF2
+     /tmp/ccMiUlka.s:1565   .debug_str:000000000000000b .LASF3
+     /tmp/ccMiUlka.s:1643   .debug_str:000000000000031c .LASF43
+     /tmp/ccMiUlka.s:1605   .debug_str:00000000000001fb .LASF5
+     /tmp/ccMiUlka.s:1639   .debug_str:000000000000030d .LASF6
+     /tmp/ccMiUlka.s:1613   .debug_str:000000000000023d .LASF7
+     /tmp/ccMiUlka.s:1575   .debug_str:000000000000005f .LASF9
+     /tmp/ccMiUlka.s:1621   .debug_str:000000000000026e .LASF14
+     /tmp/ccMiUlka.s:1649   .debug_str:0000000000000373 .LASF44
+     /tmp/ccMiUlka.s:1629   .debug_str:000000000000029b .LASF45
+     /tmp/ccMiUlka.s:1611   .debug_str:0000000000000234 .LASF8
+     /tmp/ccMiUlka.s:1655   .debug_str:00000000000003ad .LASF10
+     /tmp/ccMiUlka.s:1573   .debug_str:0000000000000057 .LASF11
+     /tmp/ccMiUlka.s:1645   .debug_str:000000000000033b .LASF12
+     /tmp/ccMiUlka.s:1577   .debug_str:0000000000000072 .LASF13
+     /tmp/ccMiUlka.s:1587   .debug_str:00000000000000c4 .LASF15
+     /tmp/ccMiUlka.s:1583   .debug_str:00000000000000af .LASF16
+     /tmp/ccMiUlka.s:1595   .debug_str:00000000000000f6 .LASF17
+     /tmp/ccMiUlka.s:1591   .debug_str:00000000000000e7 .LASF18
+     /tmp/ccMiUlka.s:1637   .debug_str:00000000000002f2 .LASF19
+     /tmp/ccMiUlka.s:1623   .debug_str:0000000000000285 .LASF20
+     /tmp/ccMiUlka.s:1631   .debug_str:00000000000002b2 .LASF21
+     /tmp/ccMiUlka.s:1625   .debug_str:000000000000028e .LASF22
+     /tmp/ccMiUlka.s:1581   .debug_str:0000000000000096 .LASF23
+     /tmp/ccMiUlka.s:1647   .debug_str:0000000000000357 .LASF46
+     /tmp/ccMiUlka.s:1569   .debug_str:0000000000000018 .LASF24
+     /tmp/ccMiUlka.s:211    .text:0000000000000114 .LFB20
+     /tmp/ccMiUlka.s:237    .text:0000000000000148 .LFE20
+     /tmp/ccMiUlka.s:227    .text:0000000000000138 .LVL19
+     /tmp/ccMiUlka.s:1653   .debug_str:0000000000000383 .LASF25
+     /tmp/ccMiUlka.s:9      .text:0000000000000000 .LFB19
+     /tmp/ccMiUlka.s:53     .text:0000000000000040 .LFE19
+     /tmp/ccMiUlka.s:1617   .debug_str:0000000000000252 .LASF26
+     /tmp/ccMiUlka.s:1563   .debug_str:0000000000000000 .LASF27
+     /tmp/ccMiUlka.s:38     .text:000000000000002c .LBB15
+     /tmp/ccMiUlka.s:49     .text:000000000000003c .LBE15
+     /tmp/ccMiUlka.s:1418   .debug_loc:0000000000000000 .LLST0
+     /tmp/ccMiUlka.s:1593   .debug_str:00000000000000f1 .LASF28
+     /tmp/ccMiUlka.s:1633   .debug_str:00000000000002cc .LASF31
+     /tmp/ccMiUlka.s:1603   .debug_str:00000000000001f6 .LASF29
+     /tmp/ccMiUlka.s:1567   .debug_str:0000000000000010 .LASF30
+     /tmp/ccMiUlka.s:1599   .debug_str:000000000000011f .LASF32
+     /tmp/ccMiUlka.s:137    .text:00000000000000ac .LFB10
+     /tmp/ccMiUlka.s:206    .text:0000000000000114 .LFE10
+     /tmp/ccMiUlka.s:152    .text:00000000000000c0 .LBB24
+     /tmp/ccMiUlka.s:1547   .debug_ranges:0000000000000000 .Ldebug_ranges0
+     /tmp/ccMiUlka.s:1427   .debug_loc:000000000000002c .LLST7
+     /tmp/ccMiUlka.s:1442   .debug_loc:0000000000000074 .LLST8
+     /tmp/ccMiUlka.s:1453   .debug_loc:00000000000000aa .LLST9
+     /tmp/ccMiUlka.s:171    .text:00000000000000e8 .LVL15
+     /tmp/ccMiUlka.s:59     .text:0000000000000040 .LFB9
+     /tmp/ccMiUlka.s:131    .text:00000000000000ac .LFE9
+     /tmp/ccMiUlka.s:1460   .debug_loc:00000000000000cd .LLST1
+     /tmp/ccMiUlka.s:76     .text:0000000000000058 .LBB18
+     /tmp/ccMiUlka.s:1482   .debug_loc:000000000000012c .LLST2
+GAS LISTING /tmp/ccMiUlka.s 			page 10
+
+
+     /tmp/ccMiUlka.s:1497   .debug_loc:0000000000000175 .LLST3
+     /tmp/ccMiUlka.s:83     .text:0000000000000064 .LBB20
+     /tmp/ccMiUlka.s:90     .text:000000000000006c .LBE20
+     /tmp/ccMiUlka.s:1512   .debug_loc:00000000000001bd .LLST4
+     /tmp/ccMiUlka.s:1520   .debug_loc:00000000000001e1 .LLST5
+     /tmp/ccMiUlka.s:1527   .debug_loc:0000000000000204 .LLST6
+     /tmp/ccMiUlka.s:82     .text:0000000000000064 .LVL6
+     /tmp/ccMiUlka.s:1635   .debug_str:00000000000002eb .LASF33
+     /tmp/ccMiUlka.s:1615   .debug_str:0000000000000242 .LASF35
+     /tmp/ccMiUlka.s:1651   .debug_str:000000000000037d .LASF34
+     /tmp/ccMiUlka.s:1619   .debug_str:0000000000000261 .LASF36
+     /tmp/ccMiUlka.s:37     .text:000000000000002c .LVL1
+     /tmp/ccMiUlka.s:46     .text:000000000000003c .LVL2
+     /tmp/ccMiUlka.s:151    .text:00000000000000c0 .LVL12
+     /tmp/ccMiUlka.s:188    .text:0000000000000100 .LVL16
+     /tmp/ccMiUlka.s:200    .text:0000000000000110 .LVL18
+     /tmp/ccMiUlka.s:158    .text:00000000000000cc .LVL13
+     /tmp/ccMiUlka.s:196    .text:000000000000010c .LVL17
+     /tmp/ccMiUlka.s:168    .text:00000000000000e0 .LVL14
+     /tmp/ccMiUlka.s:62     .text:0000000000000040 .LVL3
+     /tmp/ccMiUlka.s:80     .text:000000000000005c .LVL5
+     /tmp/ccMiUlka.s:112    .text:0000000000000090 .LVL9
+     /tmp/ccMiUlka.s:116    .text:0000000000000098 .LVL10
+     /tmp/ccMiUlka.s:75     .text:0000000000000058 .LVL4
+     /tmp/ccMiUlka.s:99     .text:0000000000000084 .LVL8
+     /tmp/ccMiUlka.s:125    .text:00000000000000a8 .LVL11
+     /tmp/ccMiUlka.s:88     .text:000000000000006c .LVL7
+     /tmp/ccMiUlka.s:254    .debug_info:0000000000000000 .Ldebug_info0
+     /tmp/ccMiUlka.s:102    .text:0000000000000084 .LBE18
+     /tmp/ccMiUlka.s:119    .text:0000000000000098 .LBB23
+     /tmp/ccMiUlka.s:127    .text:00000000000000a8 .LBE23
+     /tmp/ccMiUlka.s:174    .text:00000000000000e8 .LBE24
+     /tmp/ccMiUlka.s:191    .text:0000000000000100 .LBB27
+     /tmp/ccMiUlka.s:202    .text:0000000000000110 .LBE27
+
+UNDEFINED SYMBOLS
+_Znwm
+_ZdlPv
